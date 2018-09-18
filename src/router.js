@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Login from './components/Login.vue'
+import Login from './components/Login'
+import Register from './components/Register'
 
 Vue.use(Router);
 
@@ -10,5 +11,6 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {path: '/login', component: Login, name: 'login' },
+    {path: '/register', component: Register, name: 'register' },
   ]
 });

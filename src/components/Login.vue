@@ -63,7 +63,7 @@ export default {
     }
    
    .form-wrapp{
-        width:35%;
+        width:40%;
         height:550px;
         margin:0 auto;
         background-color:rgba(223, 223, 223, 0.5);
@@ -79,7 +79,5 @@ export default {
     label{
         float:left;
     }
-
-   
 
 </style>
