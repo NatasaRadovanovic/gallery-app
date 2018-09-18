@@ -8,10 +8,10 @@
          <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">All Galleries</a>
+                    <router-link to="/" class="nav-link">All Galleries</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"  v-if="isAuthenticated">My Galleries</a>
+                    <a class="nav-link" v-if="isAuthenticated">My Galleries</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" v-if="isAuthenticated"><i class="fas fa-pencil-alt"></i> Create New Gallery</a>
@@ -20,7 +20,7 @@
                    <router-link class="nav-item nav-link" to="/login"  v-if="!isAuthenticated">Login</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" v-if="!isAuthenticated"><i class="far fa-user"></i> Register</a>
+                    <router-link class="nav-link" to="/register" v-if="!isAuthenticated"><i class="far fa-user"></i> Register</router-link>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" @click="logout" v-if="isAuthenticated">Logout</a>

@@ -49,7 +49,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
    .wrapp{
         background-image: 
         url("https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg?auto=compress&cs=tinysrgb&h=350");
@@ -59,12 +59,12 @@ export default {
         position: relative;
    }
    form h2{
-       margin-bottom:30px;
+       margin-bottom:15px;
     }
    
    .form-wrapp{
         width:40%;
-        height:550px;
+        height:600px;
         margin:0 auto;
         background-color:rgba(223, 223, 223, 0.5);
         padding:50px;
