@@ -1,18 +1,33 @@
 <template>
   <div id="app">
-     <nav-bar></nav-bar>
+     <nav-bar :isAuthenticated="isAuthenticated" 
+              @userAuthenticated="toggleAuthenticated"/>
+     <router-view  @userAuthenticated="toggleAuthenticated"/>
   </div>
 </template>
 
 <script>
 
 import NavBar from './components/NavBar'
+import { authService } from './services/Auth'
 
 export default {
     name:'App',
     components:{
         NavBar
+    },
+
+    data(){
+    return {
+      isAuthenticated: authService.isAuthenticated()
     }
+  },
+
+   methods: {
+    toggleAuthenticated(value){
+      this.isAuthenticated = value
+     }
+  }
 }
 
 </script>

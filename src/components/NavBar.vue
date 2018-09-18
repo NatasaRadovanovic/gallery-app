@@ -11,19 +11,19 @@
                     <a class="nav-link" href="#">All Galleries</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">My Galleries</a>
+                    <a class="nav-link"  v-if="isAuthenticated">My Galleries</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-pencil-alt"></i> Create New Gallery</a>
+                    <a class="nav-link" v-if="isAuthenticated"><i class="fas fa-pencil-alt"></i> Create New Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                   <router-link class="nav-item nav-link" to="/login"  v-if="!isAuthenticated">Login</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-user"></i> Register</a>
+                    <a class="nav-link" v-if="!isAuthenticated"><i class="far fa-user"></i> Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="#" @click="logout" v-if="isAuthenticated">Logout</a>
                 </li>
      
             </ul>
@@ -33,9 +33,22 @@
 </template>
 
 <script>
+
+import { authService } from '../services/Auth' 
+
 export default {
     name:'NavBar',
-    
+     props: {
+        isAuthenticated: Boolean,
+    },
+
+    methods: {
+        logout(){
+            authService.logout()
+            this.$emit('userAuthenticated', false)
+            this.$router.push('/login')
+        }
+    }
 }
 
 </script>
