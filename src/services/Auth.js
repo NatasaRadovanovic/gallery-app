@@ -4,6 +4,7 @@ export default class Auth{
 
     constructor(){
         axios.defaults.baseURL = 'http://localhost:8000/api/'
+        this.setAuthorizationHeader();
     }
 
     isAuthenticated(){
