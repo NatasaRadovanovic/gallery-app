@@ -3,8 +3,9 @@
   <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
    <img :src="gallery.images[0].url " alt="Image" style="width:100%">
   <div class="container">
-     <p><strong>{{ gallery.name }}</strong></p>
-     <div><strong>
+     <a><strong>{{ gallery.name }}</strong></a>
+     <div>
+     <strong>
      <i class="far fa-user"></i> Author:</strong> {{ gallery.user.first_name }} {{ gallery.user.last_name }}</div>
      <p style="font-size:0.8rem"><em>{{ gallery.created_at }}</em></p>
   </div>
