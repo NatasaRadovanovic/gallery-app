@@ -1,6 +1,8 @@
 <template>
-  <div id="app">
-    <form  @submit.prevent="onSubmit">
+  <div class="wrapp" >
+    <div class="form-wrapp">
+        <form  @submit.prevent="onSubmit">
+            <h2>Login</h2>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -12,10 +14,11 @@
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
                 name="password" v-model="password">
                 <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
-            </div>
-            <button type="submit" class="btn btn-dark">Login</button>
+            </div><br/>
+            <button type="submit" class="btn btn-dark btn-sm">Login</button>
         </form>
     </div>
+  </div>
 </template>
 
 <script>
@@ -47,10 +50,24 @@ export default {
 </script>
 
 <style scoped>
-   form{
-        width:30%;
+   .wrapp{
+        background-image: 
+        url("https://images.pexels.com/photos/355770/pexels-photo-355770.jpeg?auto=compress&cs=tinysrgb&h=350");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+   }
+   form h2{
+       margin-bottom:30px;
+    }
+   
+   .form-wrapp{
+        width:35%;
+        height:550px;
         margin:0 auto;
-        margin-top:10%;
+        background-color:rgba(223, 223, 223, 0.5);
+        padding:50px;
     }
 
     input{
