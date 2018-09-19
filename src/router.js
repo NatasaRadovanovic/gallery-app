@@ -7,7 +7,7 @@ import AllGalleries from './containers/AllGalleries'
 import AuthorsGalleries from './containers/AuthorsGalleries'
 import Gallery from './containers/Gallery'
 import CreateGallery from './containers/CreateGallery'
-
+import MyGalleries from './containers/MyGalleries'
 
 Vue.use(Router);
 
@@ -17,9 +17,10 @@ export default new Router({
   routes: [
     {path: '/', redirect: 'galleries',  name:'home'},
     {path: '/galleries', component: AllGalleries, name: 'galleries'},
+    {path: '/my-galleries', component: MyGalleries, name: 'MyGalleries'},
     {path: '/authors/:id', component: AuthorsGalleries, name: 'author-galleries'},
     {path: '/galleries/:id', component: Gallery, name: 'single-gallery'},
-   // {path: '/create', component: CreateGallery, name: 'create'},
+    {path: '/create', component: CreateGallery, name: 'create'},
     {path: '/login', component: Login, name: 'login' },
     {path: '/register', component: Register, name: 'register' },
   ]

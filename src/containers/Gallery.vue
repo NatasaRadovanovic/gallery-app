@@ -1,5 +1,3 @@
-<!--COROSOUL!! I TARGET BLANK?? URADITI! -->
-
 <template>
     <div id="app">
         <br/><h4>{{ gallery.name }}</h4>

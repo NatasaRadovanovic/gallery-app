@@ -19,7 +19,7 @@ export default class Gallery{
         return axios.get(`authors/${id}`)
     }
 
-    add(gallery){
+    addGallery(gallery){
         return axios.post('galleries', gallery)
     }
 }

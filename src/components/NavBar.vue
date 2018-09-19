@@ -11,10 +11,11 @@
                     <router-link to="/" class="nav-link">All Galleries</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" v-if="isAuthenticated">My Galleries</a>
+                    <router-link class="nav-link" to="/my-galleries" v-if="isAuthenticated">My Galleries</router-link>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" v-if="isAuthenticated"><i class="fas fa-pencil-alt"></i> Create New Gallery</a>
+                    <router-link  class="nav-link" to="/create" v-if="isAuthenticated">
+                    <i class="fas fa-pencil-alt"></i> Create New Gallery</router-link>
                 </li>
                 <li class="nav-item">
                    <router-link class="nav-item nav-link" to="/login"  v-if="!isAuthenticated">Login</router-link>
