@@ -1,11 +1,12 @@
 <template>
   <div id="app"></br>
     <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
-   <img :src="gallery.images[0].url " alt="Image" style="width:100%">
-  <div class="container">
-     <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">{{ gallery.name }}</router-link>
-  </div>
-</div>
+        <img :src="gallery.images[0].url " alt="Image" style="width:100%">
+        <div class="container">
+            <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">
+            {{ gallery.name }}</router-link>
+         </div>
+    </div>
   </div>
 </template>
 
