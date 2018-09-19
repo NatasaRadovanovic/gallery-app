@@ -1,16 +1,18 @@
 <!--COROSOUL!! I TARGET BLANK?? URADITI! -->
 
 <template>
-  <div id="app">
-    <h3>{{ gallery.name }}</h3>
-    <div><i class="far fa-user"></i> Author:
-     <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
-     {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link></div>
-    <div>{{ gallery.created_at }}</div>
-    <p>{{ gallery.description }}</p>
+    <div id="app">
+        <h3>{{ gallery.name }}</h3>
+        <div>
+            <i class="far fa-user"></i> Author:
+            <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
+            {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
+        </div>
+        <div>{{ gallery.created_at }}</div>
+        <p>{{ gallery.description }}</p>
 
-  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" 
-   v-for="(image, key) in gallery.images" :key="key">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" 
+    v-for="(image, key) in gallery.images" :key="key">
     <img class="d-block w-100" :src="image.url" ></div>
   <!--<div class="carousel-inner">
     <div class="carousel-item active">

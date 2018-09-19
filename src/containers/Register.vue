@@ -3,7 +3,6 @@
     <div class="wrapp">
       <div class="form-wrapp">
         <form  @submit.prevent="onSubmit">
-          <h2>Register</h2>
             <div class="form-group">
               <label for="first_name">First Name</label>
               <input type="text" class="form-control" id="first_name" 

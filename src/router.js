@@ -6,6 +6,8 @@ import Register from './containers/Register'
 import AllGalleries from './containers/AllGalleries'
 import AuthorsGalleries from './containers/AuthorsGalleries'
 import Gallery from './containers/Gallery'
+import CreateGallery from './containers/CreateGallery'
+
 
 Vue.use(Router);
 
@@ -17,6 +19,7 @@ export default new Router({
     {path: '/galleries', component: AllGalleries, name: 'galleries'},
     {path: '/authors/:id', component: AuthorsGalleries, name: 'author-galleries'},
     {path: '/galleries/:id', component: Gallery, name: 'single-gallery'},
+   // {path: '/create', component: CreateGallery, name: 'create'},
     {path: '/login', component: Login, name: 'login' },
     {path: '/register', component: Register, name: 'register' },
   ]

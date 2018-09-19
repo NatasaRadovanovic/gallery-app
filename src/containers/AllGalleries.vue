@@ -1,15 +1,21 @@
 <template>
   <div id="app"><br/>
-  <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
-   <img :src="gallery.images[0].url " alt="Image" style="width:100%">
-  <div class="container">
-     <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">{{ gallery.name }}</router-link>
-     <div><i class="far fa-user"></i> Author:
-     <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
-     {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link></div>
-     <p style="font-size:0.8rem"><em>{{ gallery.created_at }}</em></p>
-  </div>
-</div>
+    <div v-if="galleries.length > 0">
+      <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
+        <img :src="gallery.images[0].url " alt="Image" style="width:100%">
+        <div class="container">
+          <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">{{ gallery.name }}</router-link>
+          <div><i class="far fa-user"></i> Author:
+          <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
+          {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link></div>
+          <p style="font-size:0.8rem"><em>{{ gallery.created_at }}</em></p>
+        </div>
+      </div>
+        <button>Load more</button>
+    </div>
+    <div v-else>
+        <h2>There are no galleries!</h2>
+    </div>
   </div>
 </template>
 
