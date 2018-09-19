@@ -39,10 +39,9 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
 
  div.polaroid {
-  
   width: 25%;
   height:5%;
   margin:0 auto;
