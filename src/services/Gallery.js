@@ -10,6 +10,14 @@ export default class Gallery{
         return axios.get('galleries')
         .then((response ) => response.data)
     }
+
+    get(id){
+        return axios.get(`galleries/${id}`)
+    }
+
+    getAuthorGalleries(id){
+        return axios.get(`authors/${id}`)
+    }
 }
 
 export const galleries = new Gallery();
