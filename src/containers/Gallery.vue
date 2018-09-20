@@ -27,6 +27,16 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+
+    <h5>Comments:</h5>
+      
+    <div class='card-block' v-for="comment in gallery.comments">
+      <p style="font-size:1rem;" v-if="gallery.user">
+      <i class="far fa-user"></i> {{ `${gallery.user.first_name} ${gallery.user.last_name}` }}</p> 
+      <p><em>{{ comment.created_at }}</em></p>
+      <p>{{ comment.body }}</p>
+     
+  </div>
   </div>
 </template>
 
@@ -45,6 +55,7 @@ export default {
         galleries.get(this.$route.params.id)
         .then(response => {
             this.gallery = response.data
+            console.log(response.data)
         })
         .catch(error => {
                 this.error = error.response.data.error
@@ -71,4 +82,22 @@ img{
   margin:0 auto;
   margin-top:20px;
 }
+
+.card-block{
+  border: 1px solid silver;
+  margin-bottom: 5px;
+  width: 80%;
+  margin:0 auto;
+  padding: 5px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px grey;
+ }
+
+ .card-block p{
+   font-size:0.8rem;
+ } 
+  
+  h5{
+    margin-top:50px;
+  }  
 </style>
