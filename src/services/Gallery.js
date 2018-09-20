@@ -11,6 +11,10 @@ export default class Gallery{
         .then((response ) => response.data)
     }
 
+    getNextPage(nextPage){
+        return axios.get(`${nextPage}`)
+    }
+
     get(id){
         return axios.get(`galleries/${id}`)
     }
@@ -21,6 +25,10 @@ export default class Gallery{
 
     addGallery(gallery){
         return axios.post('galleries', gallery)
+    }
+
+    getOwnersGalleries(){
+        return axios.get('my-galleries')
     }
 }
 

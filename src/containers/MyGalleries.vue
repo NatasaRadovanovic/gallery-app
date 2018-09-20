@@ -6,8 +6,6 @@
 
 <script>
 
-import { galleries } from '../services/Gallery'
-
 export default {
  
 }

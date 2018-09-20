@@ -27,7 +27,7 @@
     
         <button @click="onSubmit" type="submit" class="btn btn-dark btn-sm">Submit</button>
 
-        <button class="btn btn-danger btn-sm">Cancel</button>
+        <router-link to="/my-galleries" class="btn btn-danger btn-sm">Cancel</router-link>
       
       </form>
   </div>
@@ -40,9 +40,7 @@ export default {
   data(){
     return{
       inputs: [],
-      gallery:{
-        images:[]
-      },
+      gallery:{},
       errors:{},
     }
   },

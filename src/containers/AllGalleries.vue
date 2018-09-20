@@ -1,8 +1,7 @@
 <template>
   <div id="app"><br/>
-    <div v-if="galleries.length > 0">
-      <div  class="polaroid" v-for="gallery in galleries" :key="gallery.id">
-        <img :src="gallery.images[0].url " alt="Image" style="width:100%">
+      <div  class="polaroid" v-for="gallery in loadMoreGalleries" :key="gallery.id">
+        <img v-if="gallery.images[0]" :src="gallery.images[0].url " alt="Image" style="width:100%">
         <div class="container">
           <router-link  :to="{name: 'single-gallery', params: {id: gallery.id}}">{{ gallery.name }}</router-link>
           <div><i class="far fa-user"></i> <strong>Author:</strong>
@@ -10,12 +9,10 @@
           {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link></div>
           <p style="font-size:0.8rem"><em>{{ gallery.created_at }}</em></p>
         </div>
+    </div>
+      <div>
+        <button  v-if="galleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
       </div>
-        <button>Load more</button>
-    </div>
-    <div v-else>
-        <h2>There are no galleries!</h2>
-    </div>
   </div>
 </template>
 <script>
@@ -25,7 +22,8 @@ import { galleries } from '../services/Gallery'
 export default {
   data(){
     return{
-      galleries:[]
+      galleries:[],
+      loadMoreGalleries:[],
     }
   },
 
@@ -33,15 +31,35 @@ export default {
       galleries.getAll().then(galleries =>{
         next(vm => {
          vm.galleries = galleries
-         //console.log(galleries)
+         //console.log(galleries.next_page_url)
+         vm.paginateGalleries(vm.galleries)
+        //console.log(vm.paginateGalleries)
        }) 
     })
       .catch(err => { 
         this.error = error.response.data.error})
   },
-    
-}
-
+    methods: {
+        paginateGalleries(vmGalleries) {
+           //console.log(vmGalleries)
+            this.galleries = vmGalleries
+            this.loadMoreGalleries = this.galleries.data
+            //console.log(this.loadMoreGalleries)
+        },
+        loadMore() {
+            galleries.getNextPage(this.galleries.next_page_url)
+              .then((loadedGalleries) => {
+                  //console.log(this.galleries.next_page_url)
+                    this.galleries = loadedGalleries.data
+                    //console.log(loadedGalleries.data)
+                    //console.log(loadedGalleries.data.data.length)
+                    for(var i = 0; i < loadedGalleries.data.data.length; i++) {
+                        this.loadMoreGalleries.push(loadedGalleries.data.data[i])
+                    }
+                })
+             },
+          }
+     }
 </script>
 
 <style>
