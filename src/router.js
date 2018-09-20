@@ -17,7 +17,7 @@ export default new Router({
   routes: [
     {path: '/', redirect: 'galleries',  name:'home'},
     {path: '/galleries', component: AllGalleries, name: 'galleries'},
-    {path: '/my-galleries', component: MyGalleries, name: 'MyGalleries'},
+    {path: '/my-galleries', component: MyGalleries, name: 'my-galleries'},
     {path: '/authors/:id', component: AuthorsGalleries, name: 'author-galleries'},
     {path: '/galleries/:id', component: Gallery, name: 'single-gallery'},
     {path: '/create', component: CreateGallery, name: 'create'},
