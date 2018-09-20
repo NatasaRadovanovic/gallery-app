@@ -73,14 +73,16 @@ export default {
     },
 
     methods:{
-      onSubmit(comment) {
-      galleries.addComment(comment, this.gallery.id)
-      .then(response => {
-        galleries.get(this.gallery.id)
+      onSubmit() {
+        this.comment.gallery_id = this.gallery.id;
+        galleries.addComment(this.comment)
         .then(response => {
-          this.gallery = response.data
+            this.gallery.comments.push(this.comment)
+            this.comment = {}
         })
-      })
+        .catch((err) => {
+            this.errors = err.response.data.errors
+        })
     },
   }
 }

@@ -1,7 +1,8 @@
 <template>
   <div id="app"></br>
-    <div class="wrapper" v-if="user"> 
-      <div class="card" v-for="gallery in user.galleries" :key="gallery.id" v-if="gallery.images">
+    <div class="wrapper" v-if="user.galleries"> 
+      <div class="card" v-for="gallery in user.galleries.slice().reverse()" :key="gallery.id" 
+      v-if="gallery.images" >
         <img class="card-img-top" :src="gallery.images[0].url" alt="Card image cap">
         <div class="card-body bg-light">
           <router-link :to="{ name: 'single-gallery', params: {id: gallery.id}}">
@@ -37,7 +38,7 @@ export default {
     .then(response => {
       next(vm => {
         vm.user = response.data
-        console.log(response.data)
+        //console.log(response.data.galleries)
       })
     })
     .catch(error => {

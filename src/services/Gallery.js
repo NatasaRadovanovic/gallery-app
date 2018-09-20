@@ -31,9 +31,10 @@ export default class Gallery{
         return axios.get('my-galleries')
     }
 
-    /*addComment(comment, galleryId) {
-        return axios.post(`galleries/${galleryId}/comment`, comment)
-      }*/
+    addComment(comment) {
+        console.log(comment)
+        return axios.post('comments', comment)
+    }
 }
 
 export const galleries = new Gallery();
