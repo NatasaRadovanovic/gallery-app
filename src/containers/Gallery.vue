@@ -35,8 +35,16 @@
       <i class="far fa-user"></i> {{ `${gallery.user.first_name} ${gallery.user.last_name}` }}</p> 
       <p><em>{{ comment.created_at }}</em></p>
       <p>{{ comment.body }}</p>
-     
-  </div>
+    </div>
+
+     <form  @submit.prevent="onSubmit">
+        <div class="form-group">
+            <input type="text" class="form-control" id="comment" 
+            placeholder="Enter comment" name="comment" v-model="comment.body">
+            <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
+        </div>
+        <button type="submit" class="btn btn-dark btn-sm">Add comment</button>
+    </form>
   </div>
 </template>
 
@@ -48,6 +56,8 @@ export default {
   data(){
       return{
           gallery:[],
+          comment:{},
+          errors:[]
       }
   },
 
@@ -61,6 +71,18 @@ export default {
                 this.error = error.response.data.error
         })
     },
+
+    methods:{
+      onSubmit(comment) {
+      galleries.addComment(comment, this.gallery.id)
+      .then(response => {
+        galleries.get(this.gallery.id)
+        .then(response => {
+          this.gallery = response.data
+        })
+      })
+    },
+  }
 }
 
 </script>
@@ -86,7 +108,7 @@ img{
 .card-block{
   border: 1px solid silver;
   margin-bottom: 5px;
-  width: 80%;
+  width: 50%;
   margin:0 auto;
   padding: 5px;
   border-radius: 10px;
