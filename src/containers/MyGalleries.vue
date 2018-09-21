@@ -38,7 +38,6 @@ export default {
     .then(response => {
       next(vm => {
         vm.user = response.data
-        //console.log(response.data.galleries)
       })
     })
     .catch(error => {
@@ -50,7 +49,7 @@ export default {
 </script>
 
 <style scoped>
-.card{
+.card {
   width:60%;
   margin:0 auto;
   margin-bottom:20px;

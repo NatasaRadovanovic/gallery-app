@@ -1,9 +1,10 @@
 <template>
     <div id="app">
+      <div v-if="gallery.user">
         <br/><h4>{{ gallery.name }}</h4>
-        <div>
+         <div>
             <i class="far fa-user"></i> <strong>Author:</strong>
-            <router-link v-if="gallery.user":to="{name: 'author-galleries', params: {id: gallery.user.id}}">
+            <router-link v-if="gallery.user" :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
             {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
         </div>
         <div style="font-size:0.8rem; margin-top:10px;"><em>{{ gallery.created_at }}</em></div>
@@ -27,6 +28,10 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
+    <div><br/>
+      <button  class="btn btn-danger btn-sm" v-if="isAuthenticated &&  gallery.user.id == authUserId" 
+       @click="deleteGallery"><i class="fas fa-trash-alt"></i></button>
+    </div>
 
     <h5>Comments:</h5>
       
@@ -35,29 +40,36 @@
       <i class="far fa-user"></i> {{ `${gallery.user.first_name} ${gallery.user.last_name}` }}</p> 
       <p><em>{{ comment.created_at }}</em></p>
       <p>{{ comment.body }}</p>
-    </div>
+      <div><button v-if="isAuthenticated && gallery.user.id == authUserId"
+                   @click="deleteComment(comment.id)" class="btn btn-danger btn-sm">Delete comment</button></div>
+      </div>
 
-     <form  @submit.prevent="onSubmit">
+     <form  @submit.prevent="onSubmit" v-if="isAuthenticated">
         <div class="form-group">
-            <input type="text" class="form-control" id="comment" 
-            placeholder="Enter comment" name="comment" v-model="comment.body">
-            <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
+            <textarea class="form-control" id="comment" 
+            placeholder="Enter comment" name="comment" v-model="comment.body"></textarea>
+             <div class="alert alert-warning" v-if="errors.body">{{ errors.body[0] }}</div> 
         </div>
         <button type="submit" class="btn btn-dark btn-sm">Add comment</button>
     </form>
+  </div>
   </div>
 </template>
 
 <script>
 
 import { galleries } from '../services/Gallery'
+import { comments } from '../services/Comment'
+import { authService } from '../services/Auth'
 
 export default {
   data(){
       return{
           gallery:[],
           comment:{},
-          errors:[]
+          errors:[],
+          isAuthenticated: authService.isAuthenticated(),
+          authUserId: authService.getAuthUserId()
       }
   },
 
@@ -66,6 +78,8 @@ export default {
         .then(response => {
             this.gallery = response.data
             console.log(response.data)
+            console.log(authService.isAuthenticated())
+            
         })
         .catch(error => {
                 this.error = error.response.data.error
@@ -75,7 +89,8 @@ export default {
     methods:{
       onSubmit() {
         this.comment.gallery_id = this.gallery.id;
-        galleries.addComment(this.comment)
+        console.log(this.gallery)
+        comments.addComment(this.comment)
         .then(response => {
             this.gallery.comments.push(this.comment)
             this.comment = {}
@@ -84,8 +99,29 @@ export default {
             this.errors = err.response.data.errors
         })
     },
+
+    deleteComment(id) {
+      if(!confirm('Are you sure you want to delete the comment?')){
+        return;
+      }
+      comments.delete(id)
+      .then(() =>{
+          let index = this.gallery.comments.findIndex(comment => comment.id == id)
+          this.gallery.comments.splice(index, 1)
+       })
+      },
+
+      deleteGallery(){
+         if(!confirm('Are you sure you want to delete this gallery?')){
+           return;
+        }
+        galleries.delete(this.gallery.id)
+        .then(() => {
+           this.$router.push({ name: "my-galleries"});
+        })
+      }
+    }
   }
-}
 
 </script>
 

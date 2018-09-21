@@ -51,8 +51,7 @@ export default {
   },
 
   methods: {
-    onSubmit()
-    {
+    onSubmit(){
       authService.register(this.user)
       .then(() => {
         this.$emit('userAuthenticated', true)

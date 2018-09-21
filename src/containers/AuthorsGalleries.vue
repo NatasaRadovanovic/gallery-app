@@ -4,12 +4,13 @@
         <img :src="gallery.images[0].url " alt="Image" style="width:100%">
         <div class="container">
             <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">
-            {{ gallery.name }}</router-link>
-         </div>
+                {{ gallery.name }}
+            </router-link>
+        </div>
     </div>
     <div>
         <button  v-if="galleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
-      </div>
+    </div>
   </div>
 </template>
 
@@ -50,7 +51,7 @@ export default {
                         this.loadMoreGalleries.push(loadedGalleries.data.data[i])
                     }
                 })
-             },
+            },
         }
     }
 

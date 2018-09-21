@@ -15,7 +15,8 @@
                 </li>
                 <li class="nav-item">
                     <router-link  class="nav-link" to="/create" v-if="isAuthenticated">
-                    <i class="fas fa-pencil-alt"></i> Create New Gallery</router-link>
+                        <i class="fas fa-pencil-alt"></i> Create New Gallery
+                    </router-link>
                 </li>
                 <li class="nav-item">
                    <router-link class="nav-item nav-link" to="/login"  v-if="!isAuthenticated">Login</router-link>
@@ -26,7 +27,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#" @click="logout" v-if="isAuthenticated">Logout</a>
                 </li>
-     
             </ul>
         </div>
     </nav>

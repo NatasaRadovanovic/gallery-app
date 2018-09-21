@@ -32,8 +32,11 @@ export default class Gallery{
     }
 
     addComment(comment) {
-        console.log(comment)
         return axios.post('comments', comment)
+    }
+
+    delete(id){
+        return axios.delete(`galleries/${id}`)
     }
 }
 

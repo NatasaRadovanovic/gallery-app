@@ -75,15 +75,16 @@ export default {
           this.errors = err.response.data.errors
       })
     },
-      addRow(){
-          this.inputs++
+      
+     addRow(){
+        this.inputs++
     },
-       deleteRow(index) {
-      this.inputs--
-   },
-
-  }
- }
+       
+      deleteRow(index) {
+        this.inputs--
+     },
+    }
+   }
 
 </script>
 

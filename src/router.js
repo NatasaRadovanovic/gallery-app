@@ -20,7 +20,7 @@ export default new Router({
     {path: '/my-galleries', component: MyGalleries, name: 'my-galleries'},
     {path: '/authors/:id', component: AuthorsGalleries, name: 'author-galleries'},
     {path: '/galleries/:id', component: Gallery, name: 'single-gallery'},
-    {path: '/create', component: CreateGallery, name: 'create'},
+    {path: '/create', component: CreateGallery, name: 'create' },
     {path: '/login', component: Login, name: 'login' },
     {path: '/register', component: Register, name: 'register' },
   ]
