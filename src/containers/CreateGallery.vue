@@ -4,7 +4,7 @@
       <div class="form-group">
         <label for="name">Name of Gallery</label>
         <input type="text" class="form-control" id="name" 
-        placeholder="Title" name="name" v-model="gallery.name">
+        placeholder="Title" name="name" v-model="gallery.name" required>
          <div class="alert alert-warning" v-if="errors.name">{{ errors.name[0] }}</div>
       </div>
       <div class="form-group">
@@ -33,6 +33,7 @@
 
     <div class="form-group" v-for="(n, index) in inputs" :key="index">
         <input id="image_url" name="image_url" v-model='gallery.images[index]' placeholder="Add url" required>
+        <p class="alert alert-danger" v-if="errors[`images.${index}`]">{{errors}}</p>
         <button v-if="inputs > 1" @click="deleteRow(index)">Delete</button>
     </div>
 
@@ -81,6 +82,7 @@ export default {
     },
        
       deleteRow(index) {
+        this.gallery.images.splice(index, 1)
         this.inputs--
      },
     }

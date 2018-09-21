@@ -5,13 +5,13 @@
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email" name="email" v-model="email">
+            placeholder="Enter email" name="email" v-model="email" required>
             <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-            name="password" v-model="password">
+            name="password" v-model="password" required>
             <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
         </div><br/>
         <button type="submit" class="btn btn-dark btn-sm">Login</button>
