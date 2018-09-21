@@ -36,13 +36,17 @@
     <h5>Comments:</h5>
       
     <div class='card-block' v-for="comment in gallery.comments">
-      <p style="font-size:1rem;" v-if="gallery.user">
-      <i class="far fa-user"></i> {{ `${gallery.user.first_name} ${gallery.user.last_name}` }}</p> 
+      <p style="font-size:1rem;" v-if="comment.user">
+       {{ `${comment.user.first_name} ${comment.user.last_name}` }}
+      </p> 
       <p><em>{{ comment.created_at }}</em></p>
       <p>{{ comment.body }}</p>
-      <div><button v-if="isAuthenticated && gallery.user.id == authUserId"
-                   @click="deleteComment(comment.id)" class="btn btn-danger btn-sm">Delete comment</button></div>
+      <div v-if="comment.user">
+        <button v-if="isAuthenticated && comment.user.id == authUserId"
+         @click="deleteComment(comment.id)" class="btn btn-danger btn-sm">Delete comment
+        </button>
       </div>
+    </div>
 
      <form  @submit.prevent="onSubmit" v-if="isAuthenticated">
         <div class="form-group">
@@ -89,10 +93,13 @@ export default {
     methods:{
       onSubmit() {
         this.comment.gallery_id = this.gallery.id;
-        console.log(this.gallery)
+  
         comments.addComment(this.comment)
-        .then(response => {
+          .then(response => {
+            this.comment = response.data
+            console.log(this.comment)
             this.gallery.comments.push(this.comment)
+            //console.log(response)
             this.comment = {}
         })
         .catch((err) => {

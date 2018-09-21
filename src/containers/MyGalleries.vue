@@ -1,24 +1,16 @@
 <template>
   <div id="app"></br>
-    <div class="wrapper" v-if="user.galleries"> 
-      <div class="card" v-for="gallery in user.galleries.slice().reverse()" :key="gallery.id" 
-      v-if="gallery.images" >
-        <img class="card-img-top" :src="gallery.images[0].url" alt="Card image cap">
-        <div class="card-body bg-light">
-          <router-link :to="{ name: 'single-gallery', params: {id: gallery.id}}">
-            <p class="card-text"><strong>{{ gallery.name}}</strong></p>
-          </router-link>
-          <div class="card-text" style="padding: 0.6rem;">
-              <i class="far fa-user"></i> <strong>Author: </strong>
-              <router-link :to="{ name: 'my-galleries', params: {id: user.id}}">
-                <em>{{ user.first_name }} {{ user.last_name }}</em>
-              </router-link>
-            <div class="card-text" style="font-size: 0.7rem;">{{ gallery.created_at }}</div>
-          </div>
+   <div class="polaroid" v-for="gallery in loadMoreGalleries" :key="gallery.id">
+        <img :src="gallery.images[0].url " alt="Image" style="width:100%">
+        <div class="container">
+            <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">
+                {{ gallery.name }}
+            </router-link>
         </div>
-      </div>
-    </div> 
-      <div id="no-galleries" v-else><strong>There is no galleries yet.</strong></div>
+    </div>
+     <div>
+        <button  v-if="galleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
+    </div>
   </div>
 </template>
 
@@ -29,7 +21,8 @@ import { galleries } from '../services/Gallery'
 export default {
   data(){
     return{
-      user:{}
+      galleries:[],
+      loadMoreGalleries:[],
     }
   },
  
@@ -37,13 +30,32 @@ export default {
     galleries.getOwnersGalleries()
     .then(response => {
       next(vm => {
-        vm.user = response.data
+        vm.galleries = response.data
+         vm.paginateGalleries(vm.galleries)
+        console.log(vm.galleries)
       })
     })
     .catch(error => {
       this.error = error.response.data.error
     })
   },
+ methods: {
+    paginateGalleries(vmGalleries) {
+      this.galleries = vmGalleries
+      this.loadMoreGalleries = this.galleries.data
+    },
+      
+    loadMore() {
+      galleries.getNextPage(this.galleries.next_page_url)
+        .then((loadedGalleries) => {
+          this.galleries = loadedGalleries.data
+          for(var i = 0; i < loadedGalleries.data.data.length; i++) {
+            this.loadMoreGalleries.push(loadedGalleries.data.data[i])
+          }
+        })
+      },
+    }
+
  }
 
 </script>

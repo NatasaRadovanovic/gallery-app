@@ -38,7 +38,7 @@ export default {
        }) 
     })
       .catch(err => { 
-        this.error = error.response.data.error})
+        this.error = err.response.data.error})
   },
   
   methods: {
