@@ -15,7 +15,8 @@
       </div>
       
       <div class="form-group" v-for="(n, index) in inputs" :key="index">
-        <input id="image_url" class="url-input" name="image_url" v-model='gallery.images[index]' placeholder="Add url" required>
+        <input id="image_url" class="url-input" name="image_url" v-model='gallery.images[index]' 
+        placeholder="Add url" required>
         <p class="alert alert-danger" v-if="errors[`images.${index}`]">Wrong format of image</p>
         <button class="btn btn-success btn-sm" @click="addRow"><i class="fas fa-plus"></i></button>
         <button class="btn btn-danger btn-sm" v-if="inputs > 1" @click="deleteRow(index)"><i class="fas fa-trash-alt"></i></button>

@@ -4,7 +4,7 @@
         <br/><h4>{{ gallery.name }}</h4>
          <div>
             <strong><i class="fas fa-user"></i> Author:</strong>
-            <router-link v-if="gallery.user" :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
+            <router-link v-if="gallery.user" :to="{name: 'author-galleries', params: {id: gallery.user.id}}" class="gallery-author">
             {{ gallery.user.first_name }} {{ gallery.user.last_name }}</router-link>
         </div>
         <div style="font-size:0.8rem; margin-top:10px;"><em><i class="far fa-clock"></i> {{ gallery.created_at }}</em></div>

@@ -1,15 +1,15 @@
 <template>
   <div id="app"></br>
-    <div class="polaroid" v-for="gallery in loadMoreGalleries" :key="gallery.id">
+    <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
         <img :src="gallery.images[0].url " alt="Image" style="width:100%">
         <div class="container">
-            <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}">
+            <router-link :to="{name: 'single-gallery', params: {id: gallery.id}}" class="gallery-title">
                 {{ gallery.name }}
             </router-link>
         </div>
     </div>
     <div>
-        <button  v-if="galleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
+        <button  v-if="loadMoreGalleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
     </div>
   </div>
 </template>
@@ -29,8 +29,8 @@ export default {
   created() {
         galleries.getAuthorGalleries(this.$route.params.id)
         .then(response => {
-            this.galleries = response.data
-            this.paginateAuthorsGalleries(this.galleries)
+            this.galleries = response.data.data
+            this.loadMoreGalleries =  response.data
         })
         .catch(error => {
                 this.error = error.response.data.error
@@ -38,28 +38,26 @@ export default {
     },
 
     methods:{
-        paginateAuthorsGalleries(galleries) 
-        {
-            this.galleries = galleries
-            this.loadMoreGalleries = this.galleries.data
-        },
-
        loadMore() 
        {
-            galleries.getNextPage(this.galleries.next_page_url)
-              .then((loadedGalleries) => {
-                    this.galleries = loadedGalleries.data
-                    for(var i = 0; i < loadedGalleries.data.data.length; i++) {
-                        this.loadMoreGalleries.push(loadedGalleries.data.data[i])
-                }
-            })
-        },
+            galleries.getNextPage(this.loadMoreGalleries.next_page_url)
+              .then((response) => {
+                    this.loadMoreGalleries = response.data
+                    for(var i = 0; i < response.data.data.length; i++) {
+                        this.galleries.push(response.data.data[i])
+                    }
+                })
+            },
+        }
     }
-}
 
 </script>
 
 <style scoped>
-
+    
+    div.polaroid {
+        margin:0 auto;
+        margin-bottom:20px;
+    }
  
 </style>

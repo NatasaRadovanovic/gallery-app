@@ -47,6 +47,11 @@ export default class Gallery{
     {
         return axios.delete(`galleries/${id}`)
     }
+
+    edit(gallery)
+    {
+        return axios.put(`galleries/${gallery.id}`,gallery)
+    }
 }
 
 export const galleries = new Gallery();
