@@ -4,7 +4,7 @@
       <div class="form-group">
         <label for="name">Name of Gallery</label>
         <input type="text" class="form-control" id="name" 
-        placeholder="Title" name="name" v-model="gallery.name" required>
+        placeholder="Title" name="name" v-model="gallery.name" required pattern=".{2,255}"  title="2 to 255 characters">
          <div class="alert alert-warning" v-if="errors.name">{{ errors.name[0] }}</div>
       </div>
       <div class="form-group">
@@ -13,42 +13,20 @@
         name="description" v-model="gallery.description"></textarea>
         <div class="alert alert-warning" v-if="errors.description">{{ errors.description[0] }}</div>
       </div>
-       <!--<div class="form-group">
-        <label for="name">Url</label>
-        <input type="text" class="form-control" id="url" 
-        placeholder="url" name="url" required>
-      </div>
-        <div class="form-group" v-for="(input, index) in inputs" :key="index">
-        <input type="text" class="form-control" id="url" 
-        placeholder="url" name="url" v-model="input.one" >{{ input.one }} 
-        <button @click="deleteRow(index)" class="btn btn-danger btn-sm">Delete</button>
-      </div>
-      <div>
-        <button @click="addRow" class="btn btn-dark btn-sm">Add another URL</button>
-      </div><br/>
-    
-        <button @click="onSubmit" type="submit" class="btn btn-dark btn-sm">Submit</button>
-
-        <router-link to="/my-galleries" class="btn btn-danger btn-sm">Cancel</router-link>-->
-
-    <div class="form-group" v-for="(n, index) in inputs" :key="index">
-        <input id="image_url" name="image_url" v-model='gallery.images[index]' placeholder="Add url" required>
-        <p class="alert alert-danger" v-if="errors[`images.${index}`]">{{errors}}</p>
-        <button v-if="inputs > 1" @click="deleteRow(index)">Delete</button>
-    </div>
-
-        <a class="btn btn-secondary" @click="addRow">Add image url</a>
-
-        <div class="form-group row">
-            <div class="offset-4 col-8">
-                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-            </div>
-            <div class="offset-4 col-8">
-                <router-link to="my-galleries" class="btn btn-primary">Cancel</router-link>
-            </div>
-        </div>    
       
-      </form>
+      <div class="form-group" v-for="(n, index) in inputs" :key="index">
+        <input id="image_url" class="url-input" name="image_url" v-model='gallery.images[index]' placeholder="Add url" required>
+        <p class="alert alert-danger" v-if="errors[`images.${index}`]">Wrong format of image</p>
+        <button class="btn btn-success btn-sm" @click="addRow"><i class="fas fa-plus"></i></button>
+        <button class="btn btn-danger btn-sm" v-if="inputs > 1" @click="deleteRow(index)"><i class="fas fa-trash-alt"></i></button>
+      </div>
+      <div class="form-group row">
+        <div class="offset-4 col-12">
+          <button name="submit" type="submit" class="btn btn-success btn-sm">Add Gallery</button>
+          <router-link class="btn btn-danger btn-sm" to="my-galleries">Cancel</router-link>
+        </div>
+    </div>    
+    </form>
   </div>
 </template>
 <script>
@@ -67,21 +45,23 @@ export default {
   },
     
   methods:{
-    onSubmit(){
-        galleries.addGallery(this.gallery)
-        .then(response => {
-        this.$router.push('my-galleries')
-      })
-       .catch((err) => {
-          this.errors = err.response.data.errors
+    onSubmit()
+    {
+      galleries.addGallery(this.gallery)
+      .then(response => {
+      this.$router.push('my-galleries')
+    }).catch((err) => {
+         this.errors = err.response.data.errors
       })
     },
       
-     addRow(){
-        this.inputs++
+     addRow()
+    {
+      this.inputs++
     },
        
-      deleteRow(index) {
+      deleteRow(index)
+     {
         this.gallery.images.splice(index, 1)
         this.inputs--
      },
@@ -91,6 +71,8 @@ export default {
 </script>
 
 <style scoped>
-
+button{
+  margin:3px;
+}
  
 </style>

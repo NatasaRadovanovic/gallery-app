@@ -24,9 +24,10 @@ export default {
   },
 
    methods: {
-    toggleAuthenticated(value){
+    toggleAuthenticated(value)
+    {
       this.isAuthenticated = value
-     }
+    }
   }
 }
 

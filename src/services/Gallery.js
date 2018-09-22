@@ -2,40 +2,49 @@ import axios from 'axios'
 
 export default class Gallery{
 
-    constructor(){
+    constructor()
+    {
         axios.defaults.baseURL = 'http://localhost:8000/api/'
     }
 
-    getAll(){
+    getAll()
+    {
         return axios.get('galleries')
         .then((response ) => response.data)
     }
 
-    getNextPage(nextPage){
+    getNextPage(nextPage)
+    {
         return axios.get(`${nextPage}`)
     }
 
-    get(id){
+    get(id)
+    {
         return axios.get(`galleries/${id}`)
     }
 
-    getAuthorGalleries(id){
+    getAuthorGalleries(id)
+    {
         return axios.get(`authors/${id}`)
     }
 
-    addGallery(gallery){
+    addGallery(gallery)
+    {
         return axios.post('galleries', gallery)
     }
 
-    getOwnersGalleries(){
+    getOwnersGalleries()
+    {
         return axios.get('my-galleries')
     }
 
-    addComment(comment) {
+    addComment(comment) 
+    {
         return axios.post('comments', comment)
     }
 
-    delete(id){
+    delete(id)
+    {
         return axios.delete(`galleries/${id}`)
     }
 }

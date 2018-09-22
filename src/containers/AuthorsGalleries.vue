@@ -23,8 +23,8 @@ export default {
       return{
           galleries:[],
           loadMoreGalleries:[]
-      }
-  },
+        }
+    },
 
   created() {
         galleries.getAuthorGalleries(this.$route.params.id)
@@ -38,22 +38,24 @@ export default {
     },
 
     methods:{
-        paginateAuthorsGalleries(galleries) {
+        paginateAuthorsGalleries(galleries) 
+        {
             this.galleries = galleries
             this.loadMoreGalleries = this.galleries.data
         },
 
-       loadMore() {
+       loadMore() 
+       {
             galleries.getNextPage(this.galleries.next_page_url)
               .then((loadedGalleries) => {
                     this.galleries = loadedGalleries.data
                     for(var i = 0; i < loadedGalleries.data.data.length; i++) {
                         this.loadMoreGalleries.push(loadedGalleries.data.data[i])
-                    }
-                })
-            },
-        }
+                }
+            })
+        },
     }
+}
 
 </script>
 

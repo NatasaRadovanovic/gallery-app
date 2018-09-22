@@ -32,20 +32,20 @@ export default {
       next(vm => {
         vm.galleries = response.data
          vm.paginateGalleries(vm.galleries)
-        console.log(vm.galleries)
       })
-    })
-    .catch(error => {
+    }).catch(error => {
       this.error = error.response.data.error
     })
   },
  methods: {
-    paginateGalleries(vmGalleries) {
+    paginateGalleries(vmGalleries) 
+    {
       this.galleries = vmGalleries
       this.loadMoreGalleries = this.galleries.data
     },
       
-    loadMore() {
+    loadMore() 
+    {
       galleries.getNextPage(this.galleries.next_page_url)
         .then((loadedGalleries) => {
           this.galleries = loadedGalleries.data
@@ -60,7 +60,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped >
 .card {
   width:60%;
   margin:0 auto;

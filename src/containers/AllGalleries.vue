@@ -1,17 +1,19 @@
 <template>
   <div id="app"><br/>
+  <div class="wrapper">
     <div  class="polaroid" v-for="gallery in loadMoreGalleries" :key="gallery.id">
       <img v-if="gallery.images[0]" :src="gallery.images[0].url " alt="Image" style="width:100%">
       <div class="container">
         <router-link  :to="{name: 'single-gallery', params: {id: gallery.id}}">{{ gallery.name }}</router-link>
         <div>
-          <i class="far fa-user"></i> <strong>Author:</strong>
+          <strong><i class="fas fa-user"></i> Author:</strong>
           <router-link :to="{name: 'author-galleries', params: {id: gallery.user.id}}">
             {{ gallery.user.first_name }} {{ gallery.user.last_name }}
           </router-link>
         </div>
-        <p style="font-size:0.8rem"><em>{{ gallery.created_at }}</em></p>
+        <p style="font-size:0.8rem"> <em><i class="far fa-clock"></i> {{ gallery.created_at }}</em></p>
       </div>
+    </div>
     </div>
       <div>
         <button  v-if="galleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
@@ -36,18 +38,19 @@ export default {
          vm.galleries = galleries
          vm.paginateGalleries(vm.galleries)
        }) 
-    })
-      .catch(err => { 
+    }).catch(err => { 
         this.error = err.response.data.error})
   },
   
   methods: {
-    paginateGalleries(vmGalleries) {
+    paginateGalleries(vmGalleries) 
+    {
       this.galleries = vmGalleries
       this.loadMoreGalleries = this.galleries.data
     },
       
-    loadMore() {
+    loadMore() 
+    {
       galleries.getNextPage(this.galleries.next_page_url)
         .then((loadedGalleries) => {
           this.galleries = loadedGalleries.data
@@ -63,8 +66,12 @@ export default {
 
 <style>
 
+  .wrapper{
+    display:flex;
+    flex-wrap:wrap;
+  }
  div.polaroid {
-  width: 60%;
+  width: 30%;
   height:20%;
   margin:0 auto;
   background-color: white;

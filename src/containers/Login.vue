@@ -1,22 +1,22 @@
 <template>
   <div>
-    <form  @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit">
         <h2>Login</h2>
         <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1"><i class="far fa-envelope"></i> Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             placeholder="Enter email" name="email" v-model="email" required>
             <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label for="exampleInputPassword1"><i class="far fa-eye-slash"></i> Password</label>
             <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
-            name="password" v-model="password" required>
+            name="password" v-model="password" required> 
             <div class="alert alert-danger" v-if="errors">{{ errors.error }}</div> 
         </div><br/>
         <button type="submit" class="btn btn-dark btn-sm">Login</button>
     </form>
-</div>
+ </div>
 </template>
 
 <script>
@@ -33,7 +33,8 @@ export default {
    },
 
    methods: {
-        onSubmit(){
+        onSubmit()
+        {
             authService.login(this.email, this.password)
                 .then(() => {
                     this.$emit('userAuthenticated', true)
@@ -48,14 +49,19 @@ export default {
 </script>
 
 <style>
-   form h2{
+    form h2{
        margin-bottom:15px;
     }
+
+    form h2, input, label{
+        font-family: 'Crimson Text', serif;
+    }
    
-   form{
-        width:50%;
-        height:500px;
+    form{
+        width:35%;
+        height:430px;
         margin:0 auto;
+        margin-top:30px;
         padding:50px;
     }
 
@@ -67,6 +73,8 @@ export default {
 
     label{
         float:left;
+        font-weight:bold;
     }
+
 
 </style>
