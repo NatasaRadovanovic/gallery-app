@@ -1,7 +1,6 @@
 <template>
   <div id="app"><br/>
   <search-gallery @searchGallery="searchGallery"/>
-  
   <div class="wrapper">
     <div  class="polaroid" v-for="gallery in filterGalleries" :key="gallery.id">
       <img v-if="gallery.images[0]" :src="gallery.images[0].url " alt="Image" style="width:100%">
