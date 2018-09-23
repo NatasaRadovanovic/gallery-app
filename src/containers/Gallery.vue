@@ -31,8 +31,14 @@
     <div><br/>
       <button class="btn btn-danger btn-sm delete" v-if="isAuthenticated &&  gallery.user.id == authUserId" 
        @click="deleteGallery"><i class="fas fa-trash-alt"></i></button>
+       <router-link 
+          v-if="isAuthenticated && gallery.user.id == authUserId"
+          :to="{ name: 'edit-gallery', params: {id: gallery.id}}" 
+                name="submit" class="btn btn-info btn-sm" type="submit" id="edit-btn"><i class="fas fa-pencil-alt"></i>
+        </router-link> 
     </div>
-  <div class='card-block' v-for="comment in gallery.comments">
+
+    <div class='card-block' v-for="comment in gallery.comments">
       <p style="font-size:1rem;" v-if="comment.user">
        {{ `${comment.user.first_name} ${comment.user.last_name}` }}
       </p> 
@@ -147,7 +153,7 @@ img{
 
 .card-block{
   border: 1px solid silver;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
   margin-top: 20px;
   width: 35%;
   margin:0 auto;
@@ -164,4 +170,11 @@ img{
     margin-left:800px;
   }
 
+  .btn{
+    margin:0 auto;
+    margin-left:5px;
+    margin-bottom:20px;
+  }
+
+ 
 </style>

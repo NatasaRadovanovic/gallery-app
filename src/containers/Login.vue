@@ -61,7 +61,7 @@ export default {
         width:35%;
         height:430px;
         margin:0 auto;
-        margin-top:30px;
+        margin-top:5px;
         padding:50px;
     }
 

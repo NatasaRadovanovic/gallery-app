@@ -1,8 +1,9 @@
 <template>
   <div id="app"><br/>
-    <search @searchGallery="searchGallery"/>
+  <search-gallery @searchGallery="searchGallery"/>
+  
   <div class="wrapper">
-    <div  class="polaroid" v-for="gallery in galleries" :key="gallery.id">
+    <div  class="polaroid" v-for="gallery in filterGalleries" :key="gallery.id">
       <img v-if="gallery.images[0]" :src="gallery.images[0].url " alt="Image" style="width:100%">
       <div class="container">
         <router-link class="gallery-title" :to="{name: 'single-gallery', params: {id: gallery.id}}">
@@ -25,11 +26,11 @@
 <script>
 
 import { galleries } from '../services/Gallery'
-import Search from '../components/Search'
+import SearchGallery from '../components/SearchGallery'
 
 export default {
   components: {
-    Search,
+    SearchGallery,
   },
   data(){
     return{
@@ -39,16 +40,17 @@ export default {
     }
   },
 
-  /*computed: {
-        filterGalleries: function () {  
-            return this.galleries.filter((gallery) => {             
-                return gallery.name.toLowerCase().includes(this.name) 
-                        || gallery.user.first_name.toLowerCase().includes(this.name)
-                        || gallery.user.last_name.toLowerCase().includes(this.name)
-                        || gallery.description.toLowerCase().includes(this.name)
-            })
-        }                                                                                                                                                                                              
-    },*/
+  computed: {
+    filterGalleries: function () {  
+       return this.galleries.filter((gallery) => {             
+        return gallery.name.toLowerCase().includes(this.name) 
+              || gallery.user.first_name.toLowerCase().includes(this.name)
+              || gallery.user.last_name.toLowerCase().includes(this.name)
+              || gallery.description.toLowerCase().includes(this.name)
+          })
+      }                                                                                                                                                                                              
+  },
+  
   beforeRouteEnter (to, from, next) 
   { 
     galleries.getAll()
@@ -73,7 +75,7 @@ export default {
         })
       },
       searchGallery(name){
-      this.name = name 
+      this.name= name 
       },
     }
   }

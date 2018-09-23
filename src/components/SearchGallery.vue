@@ -1,13 +1,12 @@
 <template>
    <div class="search">
         <input class="search" type="text" placeholder="Search" v-model="gallery">
-         <button class="btn btn-danger btn-sm" @click="emitInputChangeEvent">Search</button>
+         <button class="btn btn-light btn-sm" @click="emitInputChangeEvent"><i class="fas fa-search"></i></button>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'MovieSearch',
   data(){
       return{
           gallery:''
@@ -24,5 +23,9 @@ export default {
 <style>
     .search{
         margin-bottom:20px;
+    }
+
+    button{
+        margin-left:10px;
     }
 </style>

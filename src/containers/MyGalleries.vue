@@ -1,5 +1,6 @@
 <template>
   <div id="app"></br>
+  <div v-if="!galleries.length <= 0">
    <div class="polaroid" v-for="gallery in galleries" :key="gallery.id">
         <img :src="gallery.images[0].url " alt="Image" style="width:100%">
         <div class="container">
@@ -11,6 +12,7 @@
      <div>
         <button  v-if="loadMoreGalleries.next_page_url" @click="loadMore" class="btn btn-dark btn-sm">Load more...</button>
     </div>
+  </div v-else><h1>You don't have gallery yet.</h1>
   </div>
 </template>
 

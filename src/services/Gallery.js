@@ -50,7 +50,7 @@ export default class Gallery{
 
     edit(gallery)
     {
-        return axios.put(`galleries/${gallery.id}`,gallery)
+        return axios.put(`galleries/${gallery.id}`, gallery)
     }
 }
 

@@ -21,6 +21,7 @@ export default new Router({
     {path: '/authors/:id', component: AuthorsGalleries, name: 'author-galleries'},
     {path: '/galleries/:id', component: Gallery, name: 'single-gallery'},
     {path: '/create', component: CreateGallery, name: 'create' },
+    {path: '/edit-gallery/:id', component: CreateGallery, name:'edit-gallery', },      
     {path: '/login', component: Login, name: 'login' },
     {path: '/register', component: Register, name: 'register' },
   ]
